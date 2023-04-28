@@ -1,28 +1,32 @@
-document.getElementById('submitButton').addEventListener('click', () => {
+document.getElementById('submitButton').addEventListener('click', async () => {
+    const module = await import("./api_key.json", {
+        assert: {type: "json"},
+    });
     const inputText = document.getElementById('inputText').value;
     const responseArea = document.getElementById('responseArea');
-    const dotenv = require('dotenv');
-    dotenv.config();
+
     let ApiKey = "";
+
     chrome.storage.sync.get('OpenAiKey', function (object) {
         ApiKey = object.OpenAiKey;
     });
-    if (ApiKey !== "" || typeof(ApiKey) !== "undefined") {
-        ApiKey = process.env.OPENAI_API_KEY
+    if (ApiKey !== "" || typeof (ApiKey) !== "undefined") {
+        ApiKey = module.default.OPENAI_API_KEY
+        console.log();
         if (inputText !== "") {
-            fetch(`https://api.openai.com/v1/engines/davinci/completions`, {
+            await fetch(`https://api.openai.com/v1/engines/davinci/completions`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${ApiKey}`
                 },
                 body: JSON.stringify({
-                    prompt: `Hi ChatGPT! Can you reformulate or resume correctly and simply in the corresponding language this prompt while taking into account the context «${inputText}» ?`,
+                    prompt: `Hi ChatGPT! Can you reformulate correctly and simply in the corresponding language this prompt while taking into account the context «${inputText}» ?`,
                     max_tokens: 1000,
                     temperature: 0.5,
                 })
-            }).then((response) =>{
-               console.log(response.json());
+            }).then((response) => {
+                console.log(response.json());
             });
 
         }

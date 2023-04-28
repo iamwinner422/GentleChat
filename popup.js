@@ -1,11 +1,14 @@
 document.getElementById('submitButton').addEventListener('click', () => {
     const inputText = document.getElementById('inputText').value;
     const responseArea = document.getElementById('responseArea');
+    const dotenv = require('dotenv');
+    dotenv.config();
     let ApiKey = "";
     chrome.storage.sync.get('OpenAiKey', function (object) {
         ApiKey = object.OpenAiKey;
     });
     if (ApiKey !== "" || typeof(ApiKey) !== "undefined") {
+        ApiKey = process.env.OPENAI_API_KEY
         if (inputText !== "") {
             fetch(`https://api.openai.com/v1/engines/davinci/completions`, {
                 method: 'POST',

@@ -44,12 +44,20 @@ button:hover {
     margin-top: 8px;
 }
 a{
+    color: #0070c9;
+    text-decoration: none;
+}
+#options{
     position: fixed;
     right: 24px;
     top: 1rem;
-    color: #0070c9;
-    text-decoration: none;
+}
+#popup{
+    position: fixed;
+    left: 24px;
+    top: 1rem;
 }
 a:hover{
     color: #0051a2;
 }
+

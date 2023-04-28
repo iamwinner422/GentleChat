@@ -3,6 +3,6 @@ document.getElementById('submitButton').addEventListener('click', () => {
     const responseArea = document.getElementById('responseArea');
 
     // Traitez le texte d'entrée et affichez la réponse dans responseArea
-    responseArea.textContent = `Your Gentle: ${inputText}`;
+    responseArea.textContent = `Your gently question: ${inputText}`;
     responseArea.style.display = "block";
 });

@@ -43,3 +43,13 @@ button:hover {
     min-height: 70px;
     margin-top: 8px;
 }
+a{
+    position: fixed;
+    right: 24px;
+    top: 1rem;
+    color: #0070c9;
+    text-decoration: none;
+}
+a:hover{
+    color: #0051a2;
+}

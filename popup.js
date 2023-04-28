@@ -4,7 +4,7 @@ document.getElementById('submitButton').addEventListener('click', async () => {
     });
     const inputText = document.getElementById('inputText').value;
     const responseArea = document.getElementById('responseArea');
-
+    let answer = "";
     let ApiKey = "";
 
     chrome.storage.sync.get('OpenAiKey', function (object) {
@@ -14,14 +14,14 @@ document.getElementById('submitButton').addEventListener('click', async () => {
         ApiKey = module.default.OPENAI_API_KEY
         console.log();
         if (inputText !== "") {
-            await fetch(`https://api.openai.com/v1/engines/davinci/completions`, {
+            const response = await fetch(`https://api.openai.com/v1/engines/davinci/completions`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${ApiKey}`
                 },
                 body: JSON.stringify({
-                    prompt: `Hi ChatGPT! Can you reformulate correctly and simply in the corresponding language this prompt while taking into account the context «${inputText}» ?`,
+                    prompt: `Hi ChatGPT! Can you reformulate correctly and simply in the corresponding language this prompt while taking into account the context «${inputText}» ? I only want a suggested answer.`,
                     'temperature': 0.7,
                     'max_tokens': 1024,
                     'top_p': 1,
@@ -29,13 +29,20 @@ document.getElementById('submitButton').addEventListener('click', async () => {
                     'frequency_penalty': 0,
                     'presence_penalty': 1,
                 })
-            }).then((response) => {
-                console.log(response.json());
             });
+            const data = await response.json();
+            const completions = data['choices'][0]['text']
+            //answer = completions.split("«")[1].split("»")[0]
+            console.log(data, "data");
+            console.log(completions, "completions")
+            console.log(answer, "answer")
+                /*.then((response) => {
+                console.log(response.json());
+            });*/
 
         }
     }
     // Traitez le texte d'entrée et affichez la réponse dans responseArea
-    responseArea.textContent = `Your gently question: ${inputText}`;
+    responseArea.textContent = `Your gently question: ${answer}`;
     responseArea.style.display = "block";
 });

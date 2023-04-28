@@ -22,8 +22,12 @@ document.getElementById('submitButton').addEventListener('click', async () => {
                 },
                 body: JSON.stringify({
                     prompt: `Hi ChatGPT! Can you reformulate correctly and simply in the corresponding language this prompt while taking into account the context «${inputText}» ?`,
-                    max_tokens: 1000,
-                    temperature: 0.5,
+                    'temperature': 0.7,
+                    'max_tokens': 1024,
+                    'top_p': 1,
+                    'n': 1,
+                    'frequency_penalty': 0,
+                    'presence_penalty': 1,
                 })
             }).then((response) => {
                 console.log(response.json());

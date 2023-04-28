@@ -1,0 +1,45 @@
+body {
+    font-family: 'SF Pro Display', 'SF Pro Icons', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+
+    color: #1d1d1f;
+    padding: 16px;
+    width: 300px;
+}
+h1{
+    text-align: center;
+}
+textarea {
+    width: 284px;
+    height: 70px;
+    resize: none;
+    border: 1px solid #c3c3c3;
+    padding: 8px;
+    margin-bottom: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 7px;
+}
+
+button {
+    background-color: #0070c9;
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 8px;
+    border-radius: 7px;
+}
+
+button:hover {
+    background-color: #0051a2;
+}
+
+#responseArea {
+    display: none;
+    border: 1px solid #c3c3c3;
+    padding: 8px;
+    border-radius: 7px;
+    min-height: 70px;
+    margin-top: 8px;
+}
